@@ -26,6 +26,8 @@ gen_data <- function(num_sample,
   set.seed(seed) # one seed has a corresponding random graph (seed controls the graph)
   #myDAG <- randomDAG(num_var,2/(num_var-1))
   # Make sure the collider is the cause of R-variable of its parent variable
+  num_var = length(myDAG@nodes)
+
   data_del <-gen_del(num_sample, myDAG, mode, 
                      num_m=num_m, 
                      num_var=num_var, 
