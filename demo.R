@@ -12,9 +12,12 @@ source(paste(src_path,'/SyntheticDataGeneration.R',sep=""))
 # Synthethic data generation
 num_var=20
 num_sample = 10000
+
+myDAG <- randomDAG(num_var,2/(num_var-1))
+
 gen_result_list<-gen_data(num_sample = num_sample, 
                           mode = "mnar",
-                          num_var=num_var, 
+                          myDAG = myDAG,
                           num_extra_e=5, 
                           num_m = 10, 
                           seed = 777)
@@ -57,4 +60,4 @@ res.mvpc.drw <-mvpc(suffStat_m,
 shd(res.mvpc.drw,myCPDAG)
 shd(res.mvpc.permc,myCPDAG)
 shd(res_tw,myCPDAG)
-shd(res_com_pc,myCPDAG)
+print(shd(res_com_pc,myCPDAG))

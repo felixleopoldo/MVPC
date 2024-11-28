@@ -2,7 +2,7 @@
 
 gen_data <- function(num_sample,
                      mode='mar',
-                     num_var=20, 
+                     myDAG=myDAG,
                      num_extra_e=3, 
                      num_m = 6, 
                      seed=1000,
@@ -24,7 +24,7 @@ gen_data <- function(num_sample,
   # ground_truth: the ground-true DAG, CPDAG, 
   
   set.seed(seed) # one seed has a corresponding random graph (seed controls the graph)
-  myDAG <- randomDAG(num_var,2/(num_var-1))
+  #myDAG <- randomDAG(num_var,2/(num_var-1))
   # Make sure the collider is the cause of R-variable of its parent variable
   data_del <-gen_del(num_sample, myDAG, mode, 
                      num_m=num_m, 
@@ -161,7 +161,7 @@ gen_del <- function(n,myDAG,mode='mar',
 generate_missing_values <- function(p,n,myDAG,m_ind,parent_m_ind, p_missing_h=0.9, p_missing_l=0.01){
   # Give the parents of missingness indicators, and the missingness indcators
   # The missing values are generated whn the parent values are in the bottom XX percentage.
-  data <- rmvnorm(n, mean=rep(0,p), sigma=trueCov(myDAG))
+  data <- rmvnorm(n, mean=rep(0,p), sigma=trueCov(myDAG)) # Felix: Sigma should be a parameter
   data_m=data
   data_mcar=data
   for(i in c(1:length(m_ind))){
